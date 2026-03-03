@@ -1,23 +1,56 @@
 # Publishing to PyPI
 
-## Prerequisites
+## How It Works
 
-- PyPI account with API token
-- `uv` and `twine` installed
+Publishing uses **PyPI Trusted Publishers** (OIDC) — no API tokens needed.
+When you create a GitHub Release, the `publish.yml` workflow automatically
+builds, tests, and uploads to PyPI.
 
-## Build
+## One-Time Setup
+
+1. Go to https://pypi.org/manage/account/publishing/
+2. Add a **pending publisher** with:
+   - **PyPI project name:** `actionable-errors`
+   - **Owner:** `grimlor`
+   - **Repository:** `actionable-errors`
+   - **Workflow name:** `publish.yml`
+   - **Environment name:** `pypi`
+3. Create a GitHub Environment named `pypi` in the repo settings:
+   - Settings → Environments → New environment → `pypi`
+   - Optional: add deployment protection rules (e.g., required reviewers)
+
+## Publishing a Release
+
+```bash
+# 1. Bump version in pyproject.toml
+# 2. Commit and push
+git commit -am "Bump version to X.Y.Z"
+git push origin main
+
+# 3. Tag and create release
+git tag vX.Y.Z
+git push origin vX.Y.Z
+# Then create a Release on GitHub from the tag
+```
+
+Or use `gh`:
+
+```bash
+gh release create vX.Y.Z --title "vX.Y.Z" --notes "Release notes here"
+```
+
+The `publish.yml` workflow will:
+1. Run lint, type check, and tests
+2. Build wheel + sdist
+3. Upload to PyPI via OIDC (no tokens)
+
+## Local Build (for testing)
 
 ```bash
 uv build
-```
-
-This produces `dist/actionable_errors-X.Y.Z-py3-none-any.whl` and
-`dist/actionable_errors-X.Y.Z.tar.gz`.
-
-## Publish
-
-```bash
-twine upload dist/*
+ls dist/
+# actionable_errors-X.Y.Z-py3-none-any.whl
+# actionable_errors-X.Y.Z.tar.gz
 ```
 
 ## Version Bumps
@@ -27,12 +60,6 @@ Update `version` in `pyproject.toml`. Follow semver:
 - **Patch** (0.1.1): bug fixes, no API changes
 - **Minor** (0.2.0): new features, backward compatible
 - **Major** (1.0.0): breaking changes
-
-## CI/CD
-
-The GitHub Actions workflow (`.github/workflows/ci.yml`) runs on every push
-and PR. It does not auto-publish — publishing is manual to ensure intentional
-releases.
 
 ## Verification
 

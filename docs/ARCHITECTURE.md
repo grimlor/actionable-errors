@@ -56,17 +56,29 @@ infect every consumer.
 
 ### Extensible ErrorType
 
-`ErrorType(StrEnum)` defines base categories (`AUTHENTICATION`, `CONFIGURATION`,
-`NETWORK`, `PERMISSION`, `VALIDATION`, `INTERNAL`, `UNKNOWN`). Consumers extend
-with domain-specific values:
+`ErrorType(StrEnum)` defines 8 base categories (`AUTHENTICATION`, `CONFIGURATION`,
+`CONNECTION`, `TIMEOUT`, `PERMISSION`, `VALIDATION`, `NOT_FOUND`, `INTERNAL`).
+
+Python's `StrEnum` cannot be subclassed once it has members, so consumers extend
+via composition — define their own `StrEnum` and pass values to `error_type`,
+which accepts `ErrorType | str`:
 
 ```python
-class RAGErrorType(ErrorType):
+from enum import StrEnum
+from actionable_errors import ActionableError
+
+class RAGErrorType(StrEnum):
     EMBEDDING = "embedding"
     INDEX = "index"
+
+error = ActionableError(
+    error="Embedding failed",
+    error_type=RAGErrorType.EMBEDDING,
+    service="openai",
+)
 ```
 
-Standard Python enum extension — no registration, no plugin system.
+No registration, no plugin system — standard Python enums with duck-typed string values.
 
 ### ToolResult Envelope
 
