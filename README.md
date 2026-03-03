@@ -1,5 +1,9 @@
 # actionable-errors
 
+[![CI](https://github.com/grimlor/actionable-errors/actions/workflows/ci.yml/badge.svg)](https://github.com/grimlor/actionable-errors/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/grimlor/1fcd9ddb46319b8bf6ed2d6500ae5725/raw/actionable-errors-coverage.json)](https://github.com/grimlor/actionable-errors)
+[![PyPI](https://img.shields.io/pypi/v/actionable-errors)](https://pypi.org/project/actionable-errors/)
+
 Three-audience error framework for Python.
 
 Every `ActionableError` speaks to three audiences simultaneously:
