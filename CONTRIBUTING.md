@@ -39,7 +39,7 @@ task test           # pytest -v
 
 ## Code Style
 
-- **Python 3.12+** — use modern syntax (`X | Y` unions, `@dataclass`).
+- **Python 3.11+** — use modern syntax (`X | Y` unions, `@dataclass`).
 - **`from __future__ import annotations`** at the top of every module.
 - **ruff** handles formatting and import sorting. Don't fight it.
 - **mypy strict** — all functions need type annotations. No `Any` unless
@@ -111,15 +111,18 @@ error design philosophy and module responsibilities.
 
 ## Commit Messages
 
-Use clear, imperative commit messages:
+Use [Conventional Commits](https://www.conventionalcommits.org/) format:
 
 ```
-Add credential sanitizer with configurable patterns
+feat: add credential sanitizer with configurable patterns
 
 - Eight built-in regex patterns for common credential formats
 - Consumer-extensible pattern registration
 - 15 tests covering all built-in patterns and custom registration
 ```
+
+Common prefixes: `feat:`, `fix:`, `test:`, `docs:`, `build:`, `refactor:`,
+`style:`, `ci:`, `chore:`.
 
 ## Pull Requests
 
