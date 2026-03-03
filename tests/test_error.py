@@ -87,9 +87,9 @@ class TestActionableErrorConstruction:
 
         # When: checking success
         err = ActionableError(
-            error="fail",
+            error="Database connection pool exhausted",
             error_type=ErrorType.INTERNAL,
-            service="svc",
+            service="connection-pool",
         )
 
         # Then: success is always False
@@ -106,9 +106,9 @@ class TestActionableErrorConstruction:
 
         # When: checking timestamp
         err = ActionableError(
-            error="fail",
+            error="Schema validation failed for config file",
             error_type=ErrorType.INTERNAL,
-            service="svc",
+            service="config-validator",
         )
 
         # Then: timestamp is present and looks like ISO format
@@ -175,9 +175,9 @@ class TestActionableErrorConstruction:
 
         # When: checking optional fields
         err = ActionableError(
-            error="fail",
+            error="Rate limit exceeded on embedding API",
             error_type=ErrorType.INTERNAL,
-            service="svc",
+            service="embedding-service",
         )
 
         # Then: all optional fields are None
@@ -220,9 +220,9 @@ class TestActionableErrorSerialization:
         """
         # Given: minimal error
         err = ActionableError(
-            error="fail",
+            error="Pipeline stage timed out after 120s",
             error_type=ErrorType.INTERNAL,
-            service="svc",
+            service="data-pipeline",
         )
 
         # When: serializing
@@ -242,9 +242,9 @@ class TestActionableErrorSerialization:
         """
         # Given: minimal error
         err = ActionableError(
-            error="fail",
+            error="Index rebuild failed due to lock contention",
             error_type=ErrorType.INTERNAL,
-            service="svc",
+            service="search-indexer",
         )
 
         # When: serializing
@@ -300,9 +300,9 @@ class TestActionableErrorSerialization:
         """
         # Given: an error with a typed error_type
         err = ActionableError(
-            error="fail",
+            error="OAuth token refresh failed",
             error_type=ErrorType.AUTHENTICATION,
-            service="svc",
+            service="auth-gateway",
         )
 
         # When: serializing
@@ -320,9 +320,9 @@ class TestActionableErrorSerialization:
         """
         # Given: any error
         err = ActionableError(
-            error="fail",
+            error="Webhook delivery failed after 3 retries",
             error_type=ErrorType.INTERNAL,
-            service="svc",
+            service="notification-service",
         )
 
         # When: serializing
@@ -352,7 +352,7 @@ class TestActionableErrorFactories:
         Never: assert on internal factory implementation details
     """
 
-    def test_authentication_factory(self) -> None:
+    def test_authentication_factory_produces_auth_typed_error_with_guidance(self) -> None:
         """
         When ActionableError.authentication() is called
         Then it produces an AUTHENTICATION-typed error with guidance
@@ -398,7 +398,7 @@ class TestActionableErrorFactories:
             f"Custom suggestion should override default, got {err.suggestion!r}"
         )
 
-    def test_configuration_factory(self) -> None:
+    def test_configuration_factory_produces_config_typed_error_with_field_name(self) -> None:
         """
         When ActionableError.configuration() is called
         Then it produces a CONFIGURATION-typed error with the field name in the message
@@ -420,7 +420,7 @@ class TestActionableErrorFactories:
         )
         assert err.suggestion is not None, "Factory should provide a default suggestion"
 
-    def test_connection_factory(self) -> None:
+    def test_connection_factory_produces_connection_typed_error_with_url(self) -> None:
         """
         When ActionableError.connection() is called
         Then it produces a CONNECTION-typed error with service and URL in the message
@@ -445,7 +445,7 @@ class TestActionableErrorFactories:
             f"Error should mention URL: {err.error!r}"
         )
 
-    def test_timeout_factory(self) -> None:
+    def test_timeout_factory_produces_timeout_typed_error_with_duration(self) -> None:
         """
         When ActionableError.timeout() is called
         Then it produces a TIMEOUT-typed error with duration in the message
@@ -467,7 +467,7 @@ class TestActionableErrorFactories:
             f"Error should mention timeout seconds: {err.error!r}"
         )
 
-    def test_permission_factory(self) -> None:
+    def test_permission_factory_produces_permission_typed_error_with_resource(self) -> None:
         """
         When ActionableError.permission() is called
         Then it produces a PERMISSION-typed error with resource in the message
@@ -489,7 +489,7 @@ class TestActionableErrorFactories:
             f"Error should mention resource: {err.error!r}"
         )
 
-    def test_validation_factory(self) -> None:
+    def test_validation_factory_produces_validation_typed_error_with_field(self) -> None:
         """
         When ActionableError.validation() is called
         Then it produces a VALIDATION-typed error with field and reason
@@ -511,7 +511,7 @@ class TestActionableErrorFactories:
             f"Error should mention field: {err.error!r}"
         )
 
-    def test_not_found_factory(self) -> None:
+    def test_not_found_factory_produces_not_found_typed_error_with_resource_info(self) -> None:
         """
         When ActionableError.not_found() is called
         Then it produces a NOT_FOUND-typed error with resource info
@@ -537,7 +537,7 @@ class TestActionableErrorFactories:
             f"Error should mention resource id: {err.error!r}"
         )
 
-    def test_internal_factory(self) -> None:
+    def test_internal_factory_produces_internal_typed_error_with_operation(self) -> None:
         """
         When ActionableError.internal() is called
         Then it produces an INTERNAL-typed error with operation context

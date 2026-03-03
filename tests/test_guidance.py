@@ -106,7 +106,7 @@ class TestAIGuidanceCreation:
         guidance = AIGuidance(action_required="Do something")
 
         # When/Then: mutation attempt raises
-        with pytest.raises(AttributeError):
+        with pytest.raises(AttributeError, match="cannot assign to field"):
             guidance.action_required = "Do something else"  # type: ignore[misc]
 
     def test_to_dict_excludes_none_values(self) -> None:
@@ -212,7 +212,7 @@ class TestTroubleshootingCreation:
         ts = Troubleshooting(steps=["Step 1"])
 
         # When/Then: mutation attempt raises
-        with pytest.raises(AttributeError):
+        with pytest.raises(AttributeError, match="cannot assign to field"):
             ts.steps = ["Modified"]  # type: ignore[misc]
 
     def test_to_dict_returns_steps(self) -> None:
