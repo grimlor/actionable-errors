@@ -34,3 +34,6 @@ htmlcov/
 
 # Direnv local environment variables
 .envrc.local
+
+# Copilot Collabs
+.copilot/
