@@ -14,6 +14,6 @@
 
 ## Checklist
 - [ ] `from __future__ import annotations` at top of every new module
-- [ ] mypy strict passes
+- [ ] pyright passes
 - [ ] ruff lint + format passes
 - [ ] No runtime dependencies added (stdlib only)
