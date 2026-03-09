@@ -177,6 +177,40 @@ class TestExceptionClassification:
             f"Expected INTERNAL for unrecognized error, got {result.error_type!r}"
         )
 
+    def test_no_accounts_routes_to_authentication(self) -> None:
+        """
+        Given an exception mentioning "no accounts" (Azure credential cache miss)
+        When from_exception() classifies it
+        Then the result is an AUTHENTICATION-typed error
+        """
+        # Given: Azure credential cache miss
+        exc = Exception("No accounts were found in the cache")
+
+        # When: classifying
+        result = from_exception(exc, service="App Insights", operation="query")
+
+        # Then: routed to AUTHENTICATION
+        assert result.error_type == ErrorType.AUTHENTICATION, (
+            f"Expected AUTHENTICATION for 'no accounts', got {result.error_type!r}"
+        )
+
+    def test_token_keyword_routes_to_authentication(self) -> None:
+        """
+        Given an exception mentioning "token"
+        When from_exception() classifies it
+        Then the result is an AUTHENTICATION-typed error
+        """
+        # Given: token error
+        exc = Exception("Failed to acquire token for resource")
+
+        # When: classifying
+        result = from_exception(exc, service="Azure", operation="auth")
+
+        # Then: routed to AUTHENTICATION
+        assert result.error_type == ErrorType.AUTHENTICATION, (
+            f"Expected AUTHENTICATION for 'token', got {result.error_type!r}"
+        )
+
     def test_classification_is_case_insensitive(self) -> None:
         """
         Given an exception with mixed-case keywords

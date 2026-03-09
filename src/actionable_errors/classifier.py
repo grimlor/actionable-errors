@@ -8,7 +8,8 @@ from actionable_errors.types import ErrorType
 # Keyword → ErrorType mapping.  First match wins, so order matters.
 # Each tuple is (keywords, target_type).
 _KEYWORD_RULES: list[tuple[list[str], ErrorType]] = [
-    (["unauthorized", "unauthenticated", "credential", "login", "auth", "401"],
+    (["unauthorized", "unauthenticated", "credential", "login", "auth", "401",
+      "no accounts", "token", "defaultazurecredential"],
      ErrorType.AUTHENTICATION),
     (["forbidden", "permission", "denied", "access", "403"],
      ErrorType.PERMISSION),
