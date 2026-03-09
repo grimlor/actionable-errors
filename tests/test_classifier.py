@@ -240,9 +240,7 @@ class TestExceptionClassification:
         result = from_exception(exc, service="TestService", operation="test_op")
 
         # Then: it's an ActionableError with correct fields
-        assert isinstance(result, ActionableError), (
-            f"Expected ActionableError, got {type(result)}"
-        )
+        assert isinstance(result, ActionableError), f"Expected ActionableError, got {type(result)}"
         assert result.service == "TestService", (
             f"service should be preserved, got {result.service!r}"
         )

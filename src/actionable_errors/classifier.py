@@ -8,21 +8,29 @@ from actionable_errors.types import ErrorType
 # Keyword → ErrorType mapping.  First match wins, so order matters.
 # Each tuple is (keywords, target_type).
 _KEYWORD_RULES: list[tuple[list[str], ErrorType]] = [
-    (["unauthorized", "unauthenticated", "credential", "login", "auth", "401",
-      "no accounts", "token", "defaultazurecredential"],
-     ErrorType.AUTHENTICATION),
-    (["forbidden", "permission", "denied", "access", "403"],
-     ErrorType.PERMISSION),
-    (["timeout", "timed out", "deadline"],
-     ErrorType.TIMEOUT),
-    (["connection refused", "connection error", "unreachable", "dns", "connect"],
-     ErrorType.CONNECTION),
-    (["not found", "no such", "missing", "does not exist", "404"],
-     ErrorType.NOT_FOUND),
-    (["invalid", "validation", "malformed", "schema", "constraint"],
-     ErrorType.VALIDATION),
-    (["config", "configuration", "setting", "environment variable"],
-     ErrorType.CONFIGURATION),
+    (
+        [
+            "unauthorized",
+            "unauthenticated",
+            "credential",
+            "login",
+            "auth",
+            "401",
+            "no accounts",
+            "token",
+            "defaultazurecredential",
+        ],
+        ErrorType.AUTHENTICATION,
+    ),
+    (["forbidden", "permission", "denied", "access", "403"], ErrorType.PERMISSION),
+    (["timeout", "timed out", "deadline"], ErrorType.TIMEOUT),
+    (
+        ["connection refused", "connection error", "unreachable", "dns", "connect"],
+        ErrorType.CONNECTION,
+    ),
+    (["not found", "no such", "missing", "does not exist", "404"], ErrorType.NOT_FOUND),
+    (["invalid", "validation", "malformed", "schema", "constraint"], ErrorType.VALIDATION),
+    (["config", "configuration", "setting", "environment variable"], ErrorType.CONFIGURATION),
 ]
 
 

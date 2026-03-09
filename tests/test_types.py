@@ -45,9 +45,7 @@ class TestErrorTypeBaseCategories:
         value = ErrorType.AUTHENTICATION
 
         # Then: it has the correct string value
-        assert value == "authentication", (
-            f"Expected 'authentication', got {value!r}"
-        )
+        assert value == "authentication", f"Expected 'authentication', got {value!r}"
 
     def test_configuration_category_exists(self) -> None:
         """
@@ -60,9 +58,7 @@ class TestErrorTypeBaseCategories:
         value = ErrorType.CONFIGURATION
 
         # Then: it has the correct string value
-        assert value == "configuration", (
-            f"Expected 'configuration', got {value!r}"
-        )
+        assert value == "configuration", f"Expected 'configuration', got {value!r}"
 
     def test_connection_category_exists(self) -> None:
         """
@@ -75,9 +71,7 @@ class TestErrorTypeBaseCategories:
         value = ErrorType.CONNECTION
 
         # Then: it has the correct string value
-        assert value == "connection", (
-            f"Expected 'connection', got {value!r}"
-        )
+        assert value == "connection", f"Expected 'connection', got {value!r}"
 
     def test_timeout_category_exists(self) -> None:
         """
@@ -90,9 +84,7 @@ class TestErrorTypeBaseCategories:
         value = ErrorType.TIMEOUT
 
         # Then: it has the correct string value
-        assert value == "timeout", (
-            f"Expected 'timeout', got {value!r}"
-        )
+        assert value == "timeout", f"Expected 'timeout', got {value!r}"
 
     def test_permission_category_exists(self) -> None:
         """
@@ -105,9 +97,7 @@ class TestErrorTypeBaseCategories:
         value = ErrorType.PERMISSION
 
         # Then: it has the correct string value
-        assert value == "permission", (
-            f"Expected 'permission', got {value!r}"
-        )
+        assert value == "permission", f"Expected 'permission', got {value!r}"
 
     def test_validation_category_exists(self) -> None:
         """
@@ -120,9 +110,7 @@ class TestErrorTypeBaseCategories:
         value = ErrorType.VALIDATION
 
         # Then: it has the correct string value
-        assert value == "validation", (
-            f"Expected 'validation', got {value!r}"
-        )
+        assert value == "validation", f"Expected 'validation', got {value!r}"
 
     def test_not_found_category_exists(self) -> None:
         """
@@ -135,9 +123,7 @@ class TestErrorTypeBaseCategories:
         value = ErrorType.NOT_FOUND
 
         # Then: it has the correct string value
-        assert value == "not_found", (
-            f"Expected 'not_found', got {value!r}"
-        )
+        assert value == "not_found", f"Expected 'not_found', got {value!r}"
 
     def test_internal_category_exists(self) -> None:
         """
@@ -150,9 +136,7 @@ class TestErrorTypeBaseCategories:
         value = ErrorType.INTERNAL
 
         # Then: it has the correct string value
-        assert value == "internal", (
-            f"Expected 'internal', got {value!r}"
-        )
+        assert value == "internal", f"Expected 'internal', got {value!r}"
 
     def test_error_type_is_str_enum(self) -> None:
         """
@@ -196,9 +180,7 @@ class TestErrorTypeBaseCategories:
         result = "type:" + error_type
 
         # Then: it works as a plain string
-        assert result == "type:authentication", (
-            f"Expected 'type:authentication', got {result!r}"
-        )
+        assert result == "type:authentication", f"Expected 'type:authentication', got {result!r}"
 
 
 class TestErrorTypeExtensibility:
@@ -226,6 +208,7 @@ class TestErrorTypeExtensibility:
         When the enum is used alongside ErrorType
         Then both produce valid string values
         """
+
         # Given: a consumer defines their own error types
         class RAGErrorType(StrEnum):
             EMBEDDING = "embedding"
@@ -249,6 +232,7 @@ class TestErrorTypeExtensibility:
         When constructing an ActionableError
         Then the error_type is accepted and stored
         """
+
         class RAGErrorType(StrEnum):
             EMBEDDING = "embedding"
 
@@ -272,6 +256,7 @@ class TestErrorTypeExtensibility:
         When to_dict() is called
         Then error_type appears as its string value
         """
+
         class ADOErrorType(StrEnum):
             WORK_ITEM = "work_item"
 

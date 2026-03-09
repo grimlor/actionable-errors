@@ -53,9 +53,7 @@ class TestBuiltInPatterns:
         result = sanitize(text)
 
         # Then: password value is redacted
-        assert "s3cret!Pass" not in result, (
-            f"Password should be redacted, got: {result!r}"
-        )
+        assert "s3cret!Pass" not in result, f"Password should be redacted, got: {result!r}"
         assert "password" in result.lower(), (
             f"Context around password should be preserved, got: {result!r}"
         )
@@ -73,9 +71,7 @@ class TestBuiltInPatterns:
         result = sanitize(text)
 
         # Then: key is redacted
-        assert "sk-proj-abc123def456" not in result, (
-            f"API key should be redacted, got: {result!r}"
-        )
+        assert "sk-proj-abc123def456" not in result, f"API key should be redacted, got: {result!r}"
 
     def test_bearer_token_is_redacted(self) -> None:
         """
@@ -90,12 +86,8 @@ class TestBuiltInPatterns:
         result = sanitize(text)
 
         # Then: token is redacted
-        assert "eyJhbGciOiJ" not in result, (
-            f"Bearer token should be redacted, got: {result!r}"
-        )
-        assert "Bearer" in result, (
-            f"'Bearer' prefix should be preserved, got: {result!r}"
-        )
+        assert "eyJhbGciOiJ" not in result, f"Bearer token should be redacted, got: {result!r}"
+        assert "Bearer" in result, f"'Bearer' prefix should be preserved, got: {result!r}"
 
     def test_sas_token_is_redacted(self) -> None:
         """
@@ -161,9 +153,7 @@ class TestBuiltInPatterns:
         result = sanitize(text)
 
         # Then: token value is redacted
-        assert "ghp_" not in result, (
-            f"Token value should be redacted, got: {result!r}"
-        )
+        assert "ghp_" not in result, f"Token value should be redacted, got: {result!r}"
 
     def test_secret_assignment_is_redacted(self) -> None:
         """
@@ -300,9 +290,7 @@ class TestSanitizerEdgeCases:
         result = sanitize("")
 
         # Then: empty output
-        assert result == "", (
-            f"Empty input should return empty output, got {result!r}"
-        )
+        assert result == "", f"Empty input should return empty output, got {result!r}"
 
     def test_text_without_credentials_passes_through_unchanged(self) -> None:
         """
@@ -318,9 +306,7 @@ class TestSanitizerEdgeCases:
 
         # Then: unchanged
         assert result == text, (
-            f"Safe text should pass through unchanged.\n"
-            f"Expected: {text!r}\n"
-            f"Got:      {result!r}"
+            f"Safe text should pass through unchanged.\nExpected: {text!r}\nGot:      {result!r}"
         )
 
     def test_module_level_register_pattern_applies_to_default(self) -> None:
@@ -343,9 +329,7 @@ class TestSanitizerEdgeCases:
         assert "GLOBALTEST-ABCD1234" not in result, (
             f"Module-level register_pattern should work, got: {result!r}"
         )
-        assert "***GLOBAL***" in result, (
-            f"Custom replacement should appear, got: {result!r}"
-        )
+        assert "***GLOBAL***" in result, f"Custom replacement should appear, got: {result!r}"
 
     def test_multiple_credentials_in_one_string_are_all_redacted(self) -> None:
         """
@@ -363,12 +347,6 @@ class TestSanitizerEdgeCases:
         result = sanitize(text)
 
         # Then: all secrets are gone
-        assert "secret1" not in result, (
-            f"First password should be redacted, got: {result!r}"
-        )
-        assert "secret2" not in result, (
-            f"Second token should be redacted, got: {result!r}"
-        )
-        assert "eyJtoken123" not in result, (
-            f"Bearer token should be redacted, got: {result!r}"
-        )
+        assert "secret1" not in result, f"First password should be redacted, got: {result!r}"
+        assert "secret2" not in result, f"Second token should be redacted, got: {result!r}"
+        assert "eyJtoken123" not in result, f"Bearer token should be redacted, got: {result!r}"

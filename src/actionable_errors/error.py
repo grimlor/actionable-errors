@@ -72,7 +72,8 @@ class ActionableError(Exception):
             error_type=ErrorType.AUTHENTICATION,
             service=service,
             suggestion=suggestion or "Check your credentials and try again.",
-            ai_guidance=ai_guidance or AIGuidance(
+            ai_guidance=ai_guidance
+            or AIGuidance(
                 action_required="Re-authenticate",
                 command="az login",
             ),

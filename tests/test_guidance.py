@@ -61,9 +61,7 @@ class TestAIGuidanceCreation:
         assert guidance.command is None, (
             f"command should default to None, got {guidance.command!r}"
         )
-        assert guidance.steps is None, (
-            f"steps should default to None, got {guidance.steps!r}"
-        )
+        assert guidance.steps is None, f"steps should default to None, got {guidance.steps!r}"
 
     def test_full_guidance_with_all_fields(self) -> None:
         """
@@ -83,9 +81,7 @@ class TestAIGuidanceCreation:
         )
 
         # Then: all fields match
-        assert guidance.command == "az login", (
-            f"command mismatch: {guidance.command!r}"
-        )
+        assert guidance.command == "az login", f"command mismatch: {guidance.command!r}"
         assert guidance.discovery_tool == "list_accounts()", (
             f"discovery_tool mismatch: {guidance.discovery_tool!r}"
         )
@@ -125,12 +121,8 @@ class TestAIGuidanceCreation:
         assert result == {"action_required": "Re-authenticate"}, (
             f"Expected only action_required in dict, got {result!r}"
         )
-        assert "command" not in result, (
-            "None-valued 'command' should be excluded from dict"
-        )
-        assert "steps" not in result, (
-            "None-valued 'steps' should be excluded from dict"
-        )
+        assert "command" not in result, "None-valued 'command' should be excluded from dict"
+        assert "steps" not in result, "None-valued 'steps' should be excluded from dict"
 
     def test_to_dict_includes_all_populated_fields(self) -> None:
         """
@@ -227,9 +219,7 @@ class TestTroubleshootingCreation:
         result = ts.to_dict()
 
         # Then: dict has steps key
-        assert "steps" in result, (
-            f"Expected 'steps' key in dict, got keys: {list(result.keys())}"
-        )
+        assert "steps" in result, f"Expected 'steps' key in dict, got keys: {list(result.keys())}"
         assert result["steps"] == ["Open terminal", "Run az login", "Retry"], (
             f"steps content mismatch: {result['steps']!r}"
         )

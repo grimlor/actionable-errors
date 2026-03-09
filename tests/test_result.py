@@ -54,9 +54,7 @@ class TestToolResultSuccess:
         result = ToolResult.ok()
 
         # Then: success is True
-        assert result.success is True, (
-            f"ok() should set success=True, got {result.success!r}"
-        )
+        assert result.success is True, f"ok() should set success=True, got {result.success!r}"
 
     def test_ok_with_data(self) -> None:
         """
@@ -72,9 +70,7 @@ class TestToolResultSuccess:
 
         # Then: data is present
         assert result.data == data, (
-            f"ok(data=...) should store data.\n"
-            f"Expected: {data!r}\n"
-            f"Got:      {result.data!r}"
+            f"ok(data=...) should store data.\nExpected: {data!r}\nGot:      {result.data!r}"
         )
 
     def test_ok_error_fields_are_none(self) -> None:
@@ -86,9 +82,7 @@ class TestToolResultSuccess:
         result = ToolResult.ok()
 
         # Then: error fields are None
-        assert result.error is None, (
-            f"ok() should set error=None, got {result.error!r}"
-        )
+        assert result.error is None, f"ok() should set error=None, got {result.error!r}"
         assert result.error_type is None, (
             f"ok() should set error_type=None, got {result.error_type!r}"
         )
@@ -159,9 +153,7 @@ class TestToolResultFailure:
         result = ToolResult.fail(error=msg)
 
         # Then: success is False
-        assert result.success is False, (
-            f"fail() should set success=False, got {result.success!r}"
-        )
+        assert result.success is False, f"fail() should set success=False, got {result.success!r}"
 
     def test_fail_from_string_stores_message(self) -> None:
         """
@@ -310,9 +302,7 @@ class TestToolResultSerialization:
         d = result.to_dict()
 
         # Then: success is True
-        assert d["success"] is True, (
-            f"to_dict() should include success=True, got {d!r}"
-        )
+        assert d["success"] is True, f"to_dict() should include success=True, got {d!r}"
 
     def test_success_dict_includes_data(self) -> None:
         """
@@ -328,9 +318,7 @@ class TestToolResultSerialization:
         d = result.to_dict()
 
         # Then: data is present
-        assert d["data"] == data, (
-            f"to_dict() should include data, got {d!r}"
-        )
+        assert d["data"] == data, f"to_dict() should include data, got {d!r}"
 
     def test_success_dict_excludes_none_optional_fields(self) -> None:
         """
@@ -366,9 +354,7 @@ class TestToolResultSerialization:
         d = result.to_dict()
 
         # Then: ai_guidance is present
-        assert d["ai_guidance"] == guidance, (
-            f"ai_guidance should appear in dict, got {d!r}"
-        )
+        assert d["ai_guidance"] == guidance, f"ai_guidance should appear in dict, got {d!r}"
 
     def test_failure_dict_includes_error_and_type(self) -> None:
         """
@@ -390,12 +376,8 @@ class TestToolResultSerialization:
         d = result.to_dict()
 
         # Then: error fields present
-        assert d["success"] is False, (
-            f"to_dict() should have success=False, got {d!r}"
-        )
-        assert "error" in d, (
-            f"to_dict() should include 'error' key, got keys: {list(d.keys())}"
-        )
+        assert d["success"] is False, f"to_dict() should have success=False, got {d!r}"
+        assert "error" in d, f"to_dict() should include 'error' key, got keys: {list(d.keys())}"
         assert "error_type" in d, (
             f"to_dict() should include 'error_type' key, got keys: {list(d.keys())}"
         )

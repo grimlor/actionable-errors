@@ -68,15 +68,9 @@ class TestActionableErrorConstruction:
         )
 
         # Then: required fields are set
-        assert err.error == "Something broke", (
-            f"error mismatch: {err.error!r}"
-        )
-        assert err.error_type == ErrorType.INTERNAL, (
-            f"error_type mismatch: {err.error_type!r}"
-        )
-        assert err.service == "test-service", (
-            f"service mismatch: {err.service!r}"
-        )
+        assert err.error == "Something broke", f"error mismatch: {err.error!r}"
+        assert err.error_type == ErrorType.INTERNAL, f"error_type mismatch: {err.error_type!r}"
+        assert err.service == "test-service", f"service mismatch: {err.service!r}"
 
     def test_success_is_always_false(self) -> None:
         """
@@ -93,9 +87,7 @@ class TestActionableErrorConstruction:
         )
 
         # Then: success is always False
-        assert err.success is False, (
-            f"success should always be False, got {err.success!r}"
-        )
+        assert err.success is False, f"success should always be False, got {err.success!r}"
 
     def test_timestamp_is_auto_generated_iso_format(self) -> None:
         """
@@ -137,8 +129,7 @@ class TestActionableErrorConstruction:
 
         # Then: it's a real exception
         assert is_exception, (
-            f"ActionableError should be an Exception, bases are "
-            f"{type(err).__mro__}"
+            f"ActionableError should be an Exception, bases are {type(err).__mro__}"
         )
 
     def test_can_be_raised_and_caught(self) -> None:
@@ -181,18 +172,14 @@ class TestActionableErrorConstruction:
         )
 
         # Then: all optional fields are None
-        assert err.suggestion is None, (
-            f"suggestion should default to None, got {err.suggestion!r}"
-        )
+        assert err.suggestion is None, f"suggestion should default to None, got {err.suggestion!r}"
         assert err.ai_guidance is None, (
             f"ai_guidance should default to None, got {err.ai_guidance!r}"
         )
         assert err.troubleshooting is None, (
             f"troubleshooting should default to None, got {err.troubleshooting!r}"
         )
-        assert err.context is None, (
-            f"context should default to None, got {err.context!r}"
-        )
+        assert err.context is None, f"context should default to None, got {err.context!r}"
 
 
 class TestActionableErrorSerialization:
@@ -288,9 +275,7 @@ class TestActionableErrorSerialization:
         )
         assert "troubleshooting" in result, "troubleshooting should be in dict"
         assert "context" in result, "context should be in dict"
-        assert result["context"] == {"attempt": 3}, (
-            f"context mismatch: {result['context']!r}"
-        )
+        assert result["context"] == {"attempt": 3}, f"context mismatch: {result['context']!r}"
 
     def test_error_type_serialized_as_string_value(self) -> None:
         """
@@ -369,9 +354,7 @@ class TestActionableErrorFactories:
         assert err.error_type == ErrorType.AUTHENTICATION, (
             f"Expected AUTHENTICATION, got {err.error_type!r}"
         )
-        assert "Azure DevOps" in err.error, (
-            f"Error message should mention service: {err.error!r}"
-        )
+        assert "Azure DevOps" in err.error, f"Error message should mention service: {err.error!r}"
         assert "Token expired" in err.error, (
             f"Error message should include raw error: {err.error!r}"
         )
@@ -415,9 +398,7 @@ class TestActionableErrorFactories:
         assert err.error_type == ErrorType.CONFIGURATION, (
             f"Expected CONFIGURATION, got {err.error_type!r}"
         )
-        assert "database_url" in err.error, (
-            f"Error should mention the field name: {err.error!r}"
-        )
+        assert "database_url" in err.error, f"Error should mention the field name: {err.error!r}"
         assert err.suggestion is not None, "Factory should provide a default suggestion"
 
     def test_connection_factory_produces_connection_typed_error_with_url(self) -> None:
@@ -438,12 +419,8 @@ class TestActionableErrorFactories:
         assert err.error_type == ErrorType.CONNECTION, (
             f"Expected CONNECTION, got {err.error_type!r}"
         )
-        assert "Ollama" in err.error, (
-            f"Error should mention service: {err.error!r}"
-        )
-        assert "localhost:11434" in err.error, (
-            f"Error should mention URL: {err.error!r}"
-        )
+        assert "Ollama" in err.error, f"Error should mention service: {err.error!r}"
+        assert "localhost:11434" in err.error, f"Error should mention URL: {err.error!r}"
 
     def test_timeout_factory_produces_timeout_typed_error_with_duration(self) -> None:
         """
@@ -460,12 +437,8 @@ class TestActionableErrorFactories:
         )
 
         # Then: correctly typed with duration
-        assert err.error_type == ErrorType.TIMEOUT, (
-            f"Expected TIMEOUT, got {err.error_type!r}"
-        )
-        assert "120" in err.error, (
-            f"Error should mention timeout seconds: {err.error!r}"
-        )
+        assert err.error_type == ErrorType.TIMEOUT, f"Expected TIMEOUT, got {err.error_type!r}"
+        assert "120" in err.error, f"Error should mention timeout seconds: {err.error!r}"
 
     def test_permission_factory_produces_permission_typed_error_with_resource(self) -> None:
         """
@@ -485,9 +458,7 @@ class TestActionableErrorFactories:
         assert err.error_type == ErrorType.PERMISSION, (
             f"Expected PERMISSION, got {err.error_type!r}"
         )
-        assert "pull_request/12345" in err.error, (
-            f"Error should mention resource: {err.error!r}"
-        )
+        assert "pull_request/12345" in err.error, f"Error should mention resource: {err.error!r}"
 
     def test_validation_factory_produces_validation_typed_error_with_field(self) -> None:
         """
@@ -507,9 +478,7 @@ class TestActionableErrorFactories:
         assert err.error_type == ErrorType.VALIDATION, (
             f"Expected VALIDATION, got {err.error_type!r}"
         )
-        assert "page_size" in err.error, (
-            f"Error should mention field: {err.error!r}"
-        )
+        assert "page_size" in err.error, f"Error should mention field: {err.error!r}"
 
     def test_not_found_factory_produces_not_found_typed_error_with_resource_info(self) -> None:
         """
@@ -527,15 +496,9 @@ class TestActionableErrorFactories:
         )
 
         # Then: correctly typed with resource details
-        assert err.error_type == ErrorType.NOT_FOUND, (
-            f"Expected NOT_FOUND, got {err.error_type!r}"
-        )
-        assert "Pull Request" in err.error, (
-            f"Error should mention resource type: {err.error!r}"
-        )
-        assert "99999" in err.error, (
-            f"Error should mention resource id: {err.error!r}"
-        )
+        assert err.error_type == ErrorType.NOT_FOUND, f"Expected NOT_FOUND, got {err.error_type!r}"
+        assert "Pull Request" in err.error, f"Error should mention resource type: {err.error!r}"
+        assert "99999" in err.error, f"Error should mention resource id: {err.error!r}"
 
     def test_internal_factory_produces_internal_typed_error_with_operation(self) -> None:
         """
@@ -552,12 +515,8 @@ class TestActionableErrorFactories:
         )
 
         # Then: correctly typed
-        assert err.error_type == ErrorType.INTERNAL, (
-            f"Expected INTERNAL, got {err.error_type!r}"
-        )
-        assert "score_listings" in err.error, (
-            f"Error should mention operation: {err.error!r}"
-        )
+        assert err.error_type == ErrorType.INTERNAL, f"Expected INTERNAL, got {err.error_type!r}"
+        assert "score_listings" in err.error, f"Error should mention operation: {err.error!r}"
 
     def test_all_factories_produce_actionable_errors(self) -> None:
         """
@@ -581,9 +540,5 @@ class TestActionableErrorFactories:
             assert isinstance(err, ActionableError), (
                 f"Factory {i} did not return an ActionableError: {type(err)}"
             )
-            assert err.success is False, (
-                f"Factory {i} has success={err.success!r}, expected False"
-            )
-            assert len(err.timestamp) > 0, (
-                f"Factory {i} has empty timestamp"
-            )
+            assert err.success is False, f"Factory {i} has success={err.success!r}, expected False"
+            assert len(err.timestamp) > 0, f"Factory {i} has empty timestamp"
