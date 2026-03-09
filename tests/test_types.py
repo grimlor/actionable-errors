@@ -146,7 +146,7 @@ class TestErrorTypeBaseCategories:
         # Given: the ErrorType class
 
         # When: checking its base classes
-        is_str_enum = issubclass(ErrorType, StrEnum)
+        is_str_enum = issubclass(ErrorType, StrEnum)  # pyright: ignore[reportUnnecessaryIsInstance]
 
         # Then: it inherits from StrEnum
         assert is_str_enum, (

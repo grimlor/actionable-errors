@@ -125,7 +125,7 @@ class TestActionableErrorConstruction:
         )
 
         # When: checking type
-        is_exception = isinstance(err, Exception)
+        is_exception = isinstance(err, Exception)  # pyright: ignore[reportUnnecessaryIsInstance]
 
         # Then: it's a real exception
         assert is_exception, (
