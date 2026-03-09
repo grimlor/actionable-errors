@@ -7,7 +7,7 @@ name = "actionable-errors"
 version = "0.1.1"
 description = "Three-audience error framework: typed errors for code, actionable suggestions for humans, tool guidance for AI agents"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<3.14"
 license = { text = "MIT" }
 authors = [{ name = "grimlor" }]
 classifiers = [
@@ -91,8 +91,9 @@ indent-style = "space"
 # ---------------------------------------------------------------------------
 [tool.pyright]
 pythonVersion = "3.11"
-typeCheckingMode = "standard"
+typeCheckingMode = "strict"
 reportPrivateUsage = false
+reportMissingTypeStubs = false
 
 # ---------------------------------------------------------------------------
 # python-semantic-release
