@@ -9,7 +9,7 @@ description = "Three-audience error framework: typed errors for code, actionable
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
 license = { text = "MIT" }
-authors = [{ name = "grimlor" }]
+authors = [{ name = "Jack Pines" }]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
