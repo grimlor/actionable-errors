@@ -1,19 +1,21 @@
 # Pull Request
 
 ## Summary
-<!-- One paragraph: what this PR does and why -->
+<- What does this PR change and why? -->
 
 ## Changes
-<!-- Bullet list of changes -->
+<- Bullet list of changes, or describe the approach taken -->
 
 ## Testing
-<!-- How were these changes verified? -->
-- [ ] All existing tests pass (`task check`)
-- [ ] New tests added for new behavior
-- [ ] Coverage target maintained (100%)
+- [ ] All existing tests pass (`uv run task check`)
+- [ ] New behavior is covered by tests with BDD docstrings
+- [ ] Coverage target maintained
 
 ## Checklist
 - [ ] `from __future__ import annotations` at top of every new module
-- [ ] pyright passes
+- [ ] pyright passes in strict mode
 - [ ] ruff lint + format passes
-- [ ] No runtime dependencies added (stdlib only)
+- [ ] Commit messages follow conventional commits
+
+## Related Issues
+<- Closes #123 -->
