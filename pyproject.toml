@@ -92,8 +92,8 @@ indent-style = "space"
 [tool.pyright]
 pythonVersion = "3.11"
 typeCheckingMode = "strict"
-reportPrivateUsage = false
-reportMissingTypeStubs = false
+venvPath = "."
+venv = ".venv"
 
 # ---------------------------------------------------------------------------
 # python-semantic-release
