@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "actionable-errors"
-version = "0.1.1"
+version = "0.2.1"
 description = "Three-audience error framework: typed errors for code, actionable suggestions for humans, tool guidance for AI agents"
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
