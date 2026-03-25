@@ -1,4 +1,5 @@
-"""BDD specs for actionable_errors.sanitizer — credential redaction.
+"""
+BDD specs for actionable_errors.sanitizer — credential redaction.
 
 Covers:
     TestBuiltInPatterns — each built-in pattern redacts known credential formats

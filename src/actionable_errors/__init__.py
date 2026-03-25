@@ -1,4 +1,5 @@
-"""actionable-errors: Three-audience error framework.
+"""
+actionable-errors: Three-audience error framework.
 
 Every ActionableError speaks to three audiences simultaneously:
 - Calling code: typed ErrorType for routing (retry? escalate? ignore?)

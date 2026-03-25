@@ -1,4 +1,5 @@
-"""BDD specs for actionable_errors.types — ErrorType base categories and extensibility.
+"""
+BDD specs for actionable_errors.types — ErrorType base categories and extensibility.
 
 Covers:
     TestErrorTypeBaseCategories — base enum values exist and are StrEnum

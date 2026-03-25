@@ -41,7 +41,8 @@ def from_exception(
     *,
     suggestion: str | None = None,
 ) -> ActionableError:
-    """Classify an arbitrary exception into an ActionableError.
+    """
+    Classify an arbitrary exception into an ActionableError.
 
     Scans ``str(exc)`` against keyword rules (case-insensitive) and assigns
     the matching :class:`ErrorType`.  Falls back to ``INTERNAL`` when no

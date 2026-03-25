@@ -107,7 +107,8 @@ class CredentialSanitizer:
         pattern: str | re.Pattern[str],
         replacement: str = "***",
     ) -> None:
-        """Register an additional redaction pattern.
+        """
+        Register an additional redaction pattern.
 
         Parameters
         ----------
@@ -117,6 +118,7 @@ class CredentialSanitizer:
             Raw string or compiled ``re.Pattern``.
         replacement:
             Replacement text (may use back-references).
+
         """
         compiled = re.compile(pattern) if isinstance(pattern, str) else pattern
         self._patterns.append(_Pattern(name=name, regex=compiled, replacement=replacement))

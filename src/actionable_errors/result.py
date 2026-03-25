@@ -10,7 +10,8 @@ from actionable_errors.error import ActionableError
 
 @dataclass
 class ToolResult:
-    """Structured envelope for MCP tool responses.
+    """
+    Structured envelope for MCP tool responses.
 
     Use the ``.ok()`` and ``.fail()`` factory classmethods instead of
     constructing directly.
@@ -51,7 +52,8 @@ class ToolResult:
         suggestion: str | None = None,
         ai_guidance: dict[str, Any] | None = None,
     ) -> ToolResult:
-        """Create a failure result from a string or :class:`ActionableError`.
+        """
+        Create a failure result from a string or :class:`ActionableError`.
 
         When *error* is an ``ActionableError``, ``error_type`` and
         ``suggestion`` are extracted automatically.  An explicit

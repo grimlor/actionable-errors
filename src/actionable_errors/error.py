@@ -12,7 +12,8 @@ from actionable_errors.types import ErrorType
 
 @dataclass
 class ActionableError(Exception):
-    """Three-audience error — code routing, human suggestion, AI guidance.
+    """
+    Three-audience error — code routing, human suggestion, AI guidance.
 
     Always carries ``success = False`` and a UTC ``timestamp``.
     Construct via factory classmethods for consistency.
@@ -29,6 +30,7 @@ class ActionableError(Exception):
     timestamp: str = field(default="", init=False)
 
     def __post_init__(self) -> None:
+        """Initialize computed fields after dataclass construction."""
         super().__init__(self.error)
         self.success = False
         self.timestamp = datetime.now(tz=UTC).isoformat()

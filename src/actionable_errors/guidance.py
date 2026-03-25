@@ -8,7 +8,8 @@ from typing import Any
 
 @dataclass(frozen=True)
 class AIGuidance:
-    """Structured guidance for AI agents consuming error responses.
+    """
+    Structured guidance for AI agents consuming error responses.
 
     Only ``action_required`` is mandatory.  Optional fields let producers
     provide richer context without burdening simple callers.
@@ -32,7 +33,8 @@ class AIGuidance:
 
 @dataclass(frozen=True)
 class Troubleshooting:
-    """Ordered human-readable troubleshooting steps.
+    """
+    Ordered human-readable troubleshooting steps.
 
     ``steps`` must contain at least one entry.
     """
@@ -40,6 +42,7 @@ class Troubleshooting:
     steps: list[str]
 
     def __post_init__(self) -> None:
+        """Validate that at least one troubleshooting step is provided."""
         if not self.steps:
             msg = "Troubleshooting requires at least one step."
             raise ValueError(msg)

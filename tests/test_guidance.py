@@ -1,4 +1,5 @@
-"""BDD specs for actionable_errors.guidance — AIGuidance and Troubleshooting dataclasses.
+"""
+BDD specs for actionable_errors.guidance — AIGuidance and Troubleshooting dataclasses.
 
 Covers:
     TestAIGuidanceCreation — frozen dataclass, to_dict excludes None

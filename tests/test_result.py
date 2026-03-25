@@ -1,4 +1,5 @@
-"""BDD specs for actionable_errors.result — ToolResult envelope.
+"""
+BDD specs for actionable_errors.result — ToolResult envelope.
 
 Covers:
     TestToolResultSuccess — .ok() factory produces a success envelope

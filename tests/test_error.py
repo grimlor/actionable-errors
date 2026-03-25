@@ -1,4 +1,5 @@
-"""BDD specs for actionable_errors.error — ActionableError dataclass and factories.
+"""
+BDD specs for actionable_errors.error — ActionableError dataclass and factories.
 
 Covers:
     TestActionableErrorConstruction — basic construction, success=False, timestamp,

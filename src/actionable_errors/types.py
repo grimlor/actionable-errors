@@ -6,7 +6,8 @@ from enum import StrEnum
 
 
 class ErrorType(StrEnum):
-    """Broad error categories for routing decisions.
+    """
+    Broad error categories for routing decisions.
 
     Consumers extend this via standard Python enum inheritance::
 

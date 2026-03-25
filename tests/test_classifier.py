@@ -1,4 +1,5 @@
-"""BDD specs for actionable_errors.classifier — from_exception() auto-classification.
+"""
+BDD specs for actionable_errors.classifier — from_exception() auto-classification.
 
 Covers:
     TestExceptionClassification — keyword-based routing from raw exceptions to typed errors
